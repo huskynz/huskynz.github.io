@@ -13,12 +13,23 @@
   <script>
     window.addEventListener("DOMContentLoaded", () => {
       const params = new URLSearchParams(window.location.search);
-      const noRedirect = params.get("noredir") === "true";
+      const noRedirect = params.get("no") === "true";
 
       if (!noRedirect) {
-        setTimeout(() => {
-          window.location.href = "https://github.com/HuskyNZ";
-        }, 10000); // 10 seconds
+        let secondsLeft = 10;
+        console.log(`Redirecting in ${secondsLeft} seconds...`);
+
+        const countdown = setInterval(() => {
+          secondsLeft--;
+          console.log(`${secondsLeft}...`);
+
+          if (secondsLeft <= 0) {
+            clearInterval(countdown);
+            window.location.href = "https://github.com/HuskyNZ";
+          }
+        }, 1000);
+      } else {
+        console.log("No redirect due to ?noredir=true");
       }
     });
   </script>
