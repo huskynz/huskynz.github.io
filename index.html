@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Redirecting...</title>
-  <meta http-equiv="refresh" content="10;url=https://github.com/HuskyNZ">
   <style>
     body {
       font-family: sans-serif;
@@ -11,9 +10,22 @@
       padding-top: 50px;
     }
   </style>
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const noRedirect = params.get("noredir") === "true";
+
+      if (!noRedirect) {
+        setTimeout(() => {
+          window.location.href = "https://github.com/HuskyNZ";
+        }, 10000); // 10 seconds
+      }
+    });
+  </script>
 </head>
 <body>
-  <h1>Hi there, This is HuskyNZ's Github - You will be redirected to HuskyNZ's Github in 10 seconds...</h1>
-  <p>If you’re not redirected, <a href="https://github.com/HuskyNZ">click here</a>.</p>
+  <h1>Hi there, this is HuskyNZ's GitHub</h1>
+  <p>You will be redirected to HuskyNZ's GitHub in 10 seconds...</p>
+  <p>If you're not redirected, <a href="https://github.com/HuskyNZ">click here</a>.</p>
 </body>
 </html>
