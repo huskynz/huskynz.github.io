@@ -15,28 +15,32 @@
       const params = new URLSearchParams(window.location.search);
       const noRedirect = params.get("no") === "true";
 
-      if (!noRedirect) {
-        let secondsLeft = 10;
-        console.log(`Redirecting in ${secondsLeft} seconds...`);
+      let secondsLeft = 10;
+      const countdownElement = document.getElementById("countdown");
+      console.log(`Countdown starting at ${secondsLeft} seconds...`);
 
-        const countdown = setInterval(() => {
-          secondsLeft--;
-          console.log(`${secondsLeft}...`);
+      const countdown = setInterval(() => {
+        secondsLeft--;
+        console.log(`${secondsLeft}...`);
+        if (countdownElement) {
+          countdownElement.textContent = secondsLeft;
+        }
 
-          if (secondsLeft <= 0) {
-            clearInterval(countdown);
+        if (secondsLeft <= 0) {
+          clearInterval(countdown);
+          if (!noRedirect) {
             window.location.href = "https://github.com/HuskyNZ";
+          } else {
+            console.log("No redirect due to ?no=true");
           }
-        }, 1000);
-      } else {
-        console.log("No redirect due to ?no=true");
-      }
+        }
+      }, 1000);
     });
   </script>
 </head>
 <body>
   <h1>Hi there, this is HuskyNZ's GitHub</h1>
-  <p>You will be redirected to HuskyNZ's GitHub in 10 seconds...</p>
+  <p>You will be redirected in <span id="countdown">10</span> seconds...</p>
   <p>If you're not redirected, <a href="https://github.com/HuskyNZ">click here</a>.</p>
 </body>
 </html>
